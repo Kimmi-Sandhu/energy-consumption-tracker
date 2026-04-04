@@ -9,6 +9,7 @@ function App() {
     unit: "kWh",
     date: "",
   });
+const[editId,setEditId]=useState(null);
 
   const fetchEntries = async () => {
     try {
@@ -34,12 +35,24 @@ function App() {
     e.preventDefault();
 
     try {
-      await API.post("/energy", {
-        applianceName: form.applianceName,
-        usage: Number(form.usage),
-        unit: form.unit,
-        date: form.date,
-      });
+      if (editId) {
+        await API.post("/energy", {
+          applianceName: form.applianceName,
+          usage: Number(form.usage),
+          unit: form.unit,
+          date: form.date,
+        });
+        alert("Data updated successfully");
+        setEditId(null);
+      } else {
+        await API.post("/energy/", {
+          applianceName: form.applianceName,
+          usage: Number(form.usage),
+          unit: form.unit,
+          date: form.date,
+        });
+        alert("Data saved successfully");
+      }
 
       setForm({
         applianceName: "",
@@ -49,12 +62,19 @@ function App() {
       });
 
       fetchEntries();
-      alert("Data saved successfully");
     } catch (error) {
       console.log("Error saving data:", error);
       alert("Failed to save data");
     }
   };
+  const deleteEntry = async (id) => {
+  try {
+    await API.delete(`/energy/${id}`);
+    fetchEntries();
+  } catch (error) {
+    console.log("Delete error:", error);
+  }
+};
 
   return (
     <div style={{ padding: "30px", fontFamily: "Arial" }}>
@@ -119,6 +139,7 @@ function App() {
               <th>Usage</th>
               <th>Unit</th>
               <th>Date</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -128,6 +149,9 @@ function App() {
                 <td>{item.usage}</td>
                 <td>{item.unit}</td>
                 <td>{item.date}</td>
+                <td>
+                  <button onClick={() => deleteEntry(item._id)}>Delete</button>
+                </td>
               </tr>
             ))}
           </tbody>
