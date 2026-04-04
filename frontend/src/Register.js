@@ -4,7 +4,7 @@ import "./App.css";
 function Register() {
   return (
     <div className="login-container">
-      <h2>Register</h2>
+     <h2 style={{ color: "#0056b3", textAlign: "center" }}>Register</h2>
 
       <form className="login-form">
         <input type="text" placeholder="Full Name" required />

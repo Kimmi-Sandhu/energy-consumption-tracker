@@ -40,3 +40,86 @@ body {
 .login-container button:hover {
   background: #0056b3;
 }
+
+/* Dashboard */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #dddeda, #fbfeff);
+}
+
+.dashboard-container {
+  max-width: 800px;
+  margin: 80px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(8, 31, 205, 0.2);
+}
+.dashboard-container h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color:#007bff;
+}
+
+.dashboard-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.dashboard-form input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.dashboard-form button {
+  padding: 10px 15px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.dashboard-form button:hover {
+  background: #0056b3;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: #0056b3;
+  color: white;
+  padding: 12px;
+}
+
+td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.edit-btn,
+.delete-btn {
+  border: none;
+  padding: 6px 12px;
+  margin: 3px;
+  border-radius: 6px;
+  color: rgb(201, 16, 16);
+  cursor: pointer;
+}
+
+.edit-btn {
+  background: #28a745;
+}
+
+.delete-btn {
+  background: #dc3545;
+}

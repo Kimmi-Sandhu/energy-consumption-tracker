@@ -10,7 +10,7 @@ function Dashboard() {
   const [entries, setEntries] = useState([]);
   const [editId, setEditId] = useState(null);
 
-  const API_URL = "http://localhost:5000/api/energy";
+   const API_URL = "http://localhost:5000/api/energy";
 
   const fetchEntries = async () => {
     try {
@@ -72,7 +72,9 @@ function Dashboard() {
 
   return (
     <div className="container">
-      <h1>Energy Consumption Tracker</h1>
+      <h1 style={{ color: "#0056b3", textAlign: "center" }}>
+  Energy Consumption Tracker
+</h1>
 
       <form onSubmit={handleSubmit}>
         <input
