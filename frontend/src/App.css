@@ -106,20 +106,3 @@ td {
   border-bottom: 1px solid #ddd;
 }
 
-.edit-btn,
-.delete-btn {
-  border: none;
-  padding: 6px 12px;
-  margin: 3px;
-  border-radius: 6px;
-  color: rgb(201, 16, 16);
-  cursor: pointer;
-}
-
-.edit-btn {
-  background: #28a745;
-}
-
-.delete-btn {
-  background: #dc3545;
-}

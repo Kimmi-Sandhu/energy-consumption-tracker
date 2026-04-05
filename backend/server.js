@@ -10,7 +10,10 @@ app.use(cors());
 app.use(express.json());
 
 const energyRoutes = require("./routes/energyRoutes");
+const authRoutes = require("./routes/authRoutes");
+
 app.use("/api/energy", energyRoutes);
+app.use("/api/auth", authRoutes);
 
 app.get("/", (req, res) => {
   res.send("Server is running");
