@@ -44,7 +44,7 @@ const login = async (req, res) => {
 
     const token = jwt.sign(
       { id: user._id },
-      process.env.JWT_SECRET || "secret123",
+      process.env.JWT_SECRET || "raj_sandhu_1997",
       { expiresIn: "1d" }
     );
 
@@ -58,5 +58,27 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+// FORGOT PASSWORD
+const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "No account found with this email" });
+    }
+
+    res.status(200).json({ message: "Password reset request received" });
+  } catch (err) {
+    console.error("FORGOT PASSWORD ERROR:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+module.exports = { register, login, forgotPassword };
 
