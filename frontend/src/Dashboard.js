@@ -13,7 +13,7 @@ function Dashboard() {
   const [entries, setEntries] = useState([]);
   const [editId, setEditId] = useState(null);
 
-   const API_URL = "http://localhost:5000/api/energy";
+  const API_URL = "http://localhost:5000/api/energy";
 
    const authHeader = {
     headers: {
@@ -50,10 +50,10 @@ function Dashboard() {
 
     try {
       if (editId) {
-        await axios.put(`${API_URL}/${editId}`, formData);
+        await axios.put(`${API_URL}/${editId}`, formData, authHeader);
         setEditId(null);
       } else {
-        await axios.post(API_URL, formData);
+        await axios.post(API_URL, formData, authHeader);
       }
 
       setApplianceName("");

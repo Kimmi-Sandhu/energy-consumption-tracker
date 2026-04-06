@@ -6,6 +6,7 @@ const API_URL = "http://localhost:5000/api/auth/register";
 
 function Register() {
   const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -32,32 +33,31 @@ function Register() {
 
       if (response.ok) {
         alert("Registration successful");
-        
-        // Redirect to login page 
+        navigate("/");
       } else {
-        alert(data.message);
+        alert(data.message || "Registration failed");
       }
     } catch (error) {
-      console.error("Error registering user:", error);
+      console.error("Register error:", error);
       alert("An error occurred while registering. Please try again.");
     }
   };
 
   return (
     <div className="login-container">
-     <h2 style={{ color: "#0056b3", textAlign: "center" }}>Register</h2>
+      <h2 style={{ color: "#0056b3", textAlign: "center" }}>Register</h2>
 
       <form className="login-form" onSubmit={handleSubmit}>
-        <input type="text" placeholder="Full Name" required />
-        <input type="email" placeholder="Email" required />
-        <input type="password" placeholder="Password" required />
-        <input type="password" placeholder="Confirm Password" required />
+        <input type="text" name="name" placeholder="Full Name" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
 
         <button type="submit">Register</button>
       </form>
 
       <p>
-        Already have an account? <a href="/">Login</a>
+        Already have an account? <Link to="/">Login</Link>
       </p>
     </div>
   );

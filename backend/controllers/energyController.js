@@ -2,65 +2,71 @@ const Energy = require("../models/Energy");
 
 const getAllEnergy = async (req, res) => {
   try {
-    const data = await Energy.find();
-    res.json(data);
+   const entries = await Energy.find().sort({ date: -1 });
+    res.json(entries);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Error fetching energy data:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
 const createEnergy = async (req, res) => {
   try {
-    console.log("POST body:", req.body);
+    const { applianceName, usage, unit, date } = req.body;
 
-    const newData = new Energy({
-      applianceName: req.body.applianceName,
-      usage: Number(req.body.usage),
-      unit: req.body.unit,
-      date: req.body.date,
+    const newEntry = new Energy({
+      applianceName,
+      usage,
+      unit,
+      date,
+      user: req.user.id,
     });
 
-    const savedData = await newData.save();
-    console.log("Saved data:", savedData);
-
-    res.status(201).json(savedData);
+    const savedEntry = await newEntry.save();
+    res.status(201).json(savedEntry);
   } catch (error) {
-    console.log("POST error:", error);
-    res.status(400).json({ message: error.message });
+    console.error("Error creating energy entry:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
 const updateEnergy = async (req, res) => {
   try {
-    const updatedData = await Energy.findByIdAndUpdate(
-      req.params.id,
-      {
-        applianceName: req.body.applianceName,
-        usage: Number(req.body.usage),
-        unit: req.body.unit,
-        date: req.body.date,
-      },
+    const { applianceName, usage, unit, date } = req.body;
+
+    const updatedEntry = await Energy.findOneAndUpdate(
+      { _id: req.params.id, user: req.user.id },
+      { applianceName, usage, unit, date },
       { new: true }
     );
 
-    res.json(updatedData);
+    if (!updatedEntry) {
+      return res.status(404).json({ message: "Entry not found" });
+    }
+
+    res.json(updatedEntry);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error("Error updating energy entry:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
 const deleteEnergy = async (req, res) => {
   try {
-    await Energy.findByIdAndDelete(req.params.id);
-    res.json({ message: "Deleted successfully" });
+    const deletedEntry = await Energy.findOneAndDelete({
+      _id: req.params.id,
+      user: req.user.id,
+    });
+
+    if (!deletedEntry) {
+      return res.status(404).json({ message: "Entry not found" });
+    }
+
+    res.json({ message: "Entry deleted successfully" });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Error deleting energy entry:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
-module.exports = {
-  getAllEnergy,
-  createEnergy,
-  updateEnergy,
-  deleteEnergy,
-};
+module.exports = { getAllEnergy, createEnergy, updateEnergy, deleteEnergy };

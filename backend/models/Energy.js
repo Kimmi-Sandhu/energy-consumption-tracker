@@ -11,10 +11,16 @@ const energySchema = new mongoose.Schema({
   },
   unit: {
     type: String,
+    required: true,
     default: "kWh",
   },
   date: {
-    type: String,
+    type: Date,
+    required: true,
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
     required: true,
   },
 });
