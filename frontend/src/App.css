@@ -106,3 +106,46 @@ td {
   border-bottom: 1px solid #ddd;
 }
 
+body {
+  margin: 0;
+  padding-top: 55px;
+  font-family: Arial, sans-serif;
+  background: #f5f6fa;
+}
+
+.Navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 55px;
+  background-color: #0056b3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+.logo {
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 18px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}

@@ -8,7 +8,17 @@ import Dashboard from "./Dashboard";
 
 function App() {
   return (
-    <Router>
+    <Router>{
+      <div className= "Navbar">
+        <h2 className="logo">Energy Consumption Tracker</h2>
+        
+        <div className="nav-links">
+          <a href="/register">Register</a>
+          <a href="/">Login</a>
+          <a href="/forgot">Forgot Password</a>
+          <a href="/dashboard">Dashboard</a>
+        </div>
+      </div>}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />

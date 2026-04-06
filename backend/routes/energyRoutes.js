@@ -2,15 +2,16 @@ const express = require("express");
 const router = express.Router();
 
 const authMiddleware = require("../middleware/authMiddleware");
+
 const {
-  getAllEnergy,
-  createEnergy,
+  addEnergy,
+  getEnergy,
   updateEnergy,
-  deleteEnergy,
+  deleteEnergy
 } = require("../controllers/energyController");
 
-router.get("/", authMiddleware, getAllEnergy);
-router.post("/", authMiddleware, createEnergy);
+router.get("/", authMiddleware, getEnergy);
+router.post("/", authMiddleware, addEnergy);
 router.put("/:id", authMiddleware, updateEnergy);
 router.delete("/:id", authMiddleware, deleteEnergy);
 

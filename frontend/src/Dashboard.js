@@ -13,7 +13,7 @@ function Dashboard() {
   const [entries, setEntries] = useState([]);
   const [editId, setEditId] = useState(null);
 
-  const API_URL = "http://localhost:5000/api/energy";
+ const API_URL = "http://localhost:5000/api/energy";
 
    const authHeader = {
     headers: {

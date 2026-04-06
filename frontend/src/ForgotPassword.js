@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
-
 const API_URL = "http://localhost:5000/api/auth/forgot-password";
 
 function ForgotPassword() {
